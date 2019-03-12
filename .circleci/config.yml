@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.8
+   image: circleci/python:3.6.1 
     steps:
       - checkout
       - run: mkdir -p /workspace 
@@ -10,7 +10,7 @@ jobs:
           name: Create a file
           command: touch /workspace/XXXX
       - persist_to_workspace:
-        root: /workspace
+          root: /workspace
 
   deploy:
     docker:
