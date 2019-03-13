@@ -11,7 +11,10 @@ Please note that if the two or more releases with the same version are uploaded 
 
 ## tag-for-release branch
 the .circleci dir in this branch contains the following workflow
+
+
  BUILD --> PUBLISH RELEASE on GITHUB
+
 
 The build steps runs everytime, but the publish one happens only when we push a tag like 1.0.0.
 ```bash
