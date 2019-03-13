@@ -10,7 +10,7 @@ jobs:
       - run: mkdir -p ${ARTIFACTS_DIR} 
       - run: touch ${ARTIFACTS_DIR}/XXXX
       - persist_to_workspace:
-          root: ${ARTIFACTS_DIR}
+          root: /tmp/artifacts
           paths: ./*
   deploy:
     docker:
