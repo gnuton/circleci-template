@@ -32,10 +32,11 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build
-      - wait-for-approval: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval
-          requires:
-            - build
       - publish-github-release:
           requires:
-            - wait-for-approval
+            - build
+          filters:
+            branches:
+              only: tag-for-release     
+            tags:
+              only: /^\d+\.\d+\.\d+$/      
