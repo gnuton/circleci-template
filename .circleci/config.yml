@@ -14,14 +14,6 @@ jobs:
           root: workspace
           paths:
             - stuff 
-  has_tag:
-    docker:
-      - image: bash:latest      
-    steps:
-      - run:
-          name: Check for existing git tags
-          command: |
-            [[  -z ${CIRCLE_TAG} ]] && exit 1 || echo "Proceding with next step"
   publish-github-release:
     docker:
       - image: cibuilds/github:latest
@@ -32,6 +24,7 @@ jobs:
       - run:
           name: "Publish Release on Github"
           command: |
+            [[  -z ${CIRCLE_TAG} ]] && echo "no tags found. Skipping deployment" && exit 0     
             export VERSION=$(date +%Y%m%d)
             echo "Uploading release:${VERSION}"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} workspace/stuff/
@@ -40,12 +33,9 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build
-      - has_tag:
+      - publish-github-release:
           filters:
             branches:
-              only: tag-for-release  
+              only: tag-for-release
           requires:
             - build
-      - publish-github-release:
-          requires:
-            - has_tag
