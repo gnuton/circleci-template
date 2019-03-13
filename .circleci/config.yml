@@ -13,14 +13,13 @@ jobs:
             - stuff 
   publish-github-release:
     docker:
-      - image: circleci/golang:latest
+      - image: cibuilds/github:latest
     steps:
       - attach_workspace:
           at: workspace
       - run:
           name: "Publish Release on Github"
           comamnd: |
-            get github.com/tcnksm/ghr
             VERSION=$(date +%Y%m%d)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} workspace/stuff  
 workflows:
