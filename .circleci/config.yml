@@ -21,6 +21,7 @@ jobs:
           name: "Publish Release on Github"
           command: |
             export VERSION=$(date +%Y%m%d)
+            echo "Uploading release:${VERSION}"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} workspace/stuff
 workflows:
   version: 2
