@@ -32,13 +32,9 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build
-      - check_branch:
-          filters:
-            branches:
-             only: tag-for-release      
       - publish-github-release:
           requires:
-            - check_branch
+            - build 
           filters:
             tags:
               only: /^\d+\.\d+\.\d+$/      
