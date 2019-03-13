@@ -27,6 +27,7 @@ jobs:
             echo "Uploading release:${CIRCLE_TAG}"
             if [[ -z ${CIRCLE_TAG} ]]; then
               echo "No tag found. Skipping deployment"
+              env
             else 
               ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} workspace/stuff/
             fi
