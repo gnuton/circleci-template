@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/gnuton/circleci-template.svg?style=svg)](https://circleci.com/gh/gnuton/circleci-template)
+
 # Circleci-template
 This repository contains all circleCI files required to build some common pipelines:
 
