@@ -11,7 +11,8 @@ jobs:
       - run: touch ${ARTIFACTS_DIR}/XXXX
       - persist_to_workspace:
           root: /tmp/artifacts
-          paths: ./
+          paths:
+            - * 
   deploy:
     docker:
       - image: circleci/golang:latest
