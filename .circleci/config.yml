@@ -24,8 +24,6 @@ jobs:
       - run:
           name: "Publish Release on Github"
           command: |
-            [[  -z ${CIRCLE_TAG} ]] && echo "no tags found. Skipping deployment" && exit 0
-            [[  -z ${GITHUB_TOKEN} ]] && echo "no github token found. Please define it in the settings." && exit 0     
             echo "Uploading release:${CIRCLE_TAG}"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete $CIRCLE_TAG} workspace/stuff/
 workflows:
@@ -36,6 +34,8 @@ workflows:
       - publish-github-release:
           filters:
             branches:
-              only: tag-for-release
+              ignore: /.*/
+            tags:
+              only: /^v.*/
           requires:
             - build
