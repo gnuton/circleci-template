@@ -17,7 +17,7 @@ jobs:
       - image: circleci/golang:latest
     steps:
       - attach_workspace:
-        at: ${ARTIFACTS_DIR}
+        at: /tmp/artifacts 
       - run: ls ${ARTIFACTS_DIR}
 workflows:
   version: 2
