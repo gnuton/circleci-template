@@ -43,9 +43,9 @@ workflows:
       - has_tag:
           filters:
             branches:
-              - tag-for-release  
+              only: tag-for-release  
           requires:
-          - build
+            - build
       - publish-github-release:
           requires:
             - has_tag
