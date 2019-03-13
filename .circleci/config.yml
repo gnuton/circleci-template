@@ -1,3 +1,6 @@
+##  Circle CI v 2.0 template
+##  This template builds a CI pipeline 
+##    build -> wait_for_approval -> publish-github-release
 version: 2
 jobs:
   build:
@@ -6,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace/stuff 
-      - run: echo "TEST" > workspace/stuff/MyArtifact
+      - run: echo "TEST" > workspace/stuff/MyArtifact.txt
       - persist_to_workspace:
           root: workspace
           paths:
@@ -29,10 +32,10 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build
-        #      - hold: # <<< A job that will require manual approval in the CircleCI web application.
-        #          type: approval
-        #  requires:
-        #    - build
-      - publish-github-release:
+      - wait-for-approval: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval
           requires:
             - build
+      - publish-github-release:
+          requires:
+            - wait-for-approval
