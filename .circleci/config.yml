@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:latest
+      - image: bash:latest
     steps:
       - checkout
       - run: mkdir -p ${ARTIFACTS_DIR} 
@@ -21,7 +21,7 @@ workflows:
   version: 2
   build_and_manually_release:
     environment:
-      ARTIFACTS_DIR: /tmp/artifacts      
+      ARTIFACTS_DIR: "/tmp/artifacts"      
     jobs:      
       - build
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
