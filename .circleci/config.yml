@@ -2,18 +2,19 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.1
+      - image: circleci/golang:latest
         environment:
-          ARTIFACTS_DIR: ~/project/artifacts        
+          ARTIFACTS_DIR: /tmp/artifacts
     steps:
       - checkout
       - run: mkdir -p ${ARTIFACTS_DIR} 
       - run: touch ${ARTIFACTS_DIR}/XXXX
       - persist_to_workspace:
           root: ${ARTIFACTS_DIR}
+          paths: *
   deploy:
     docker:
-      - image: circleci/golang:1.8
+      - image: circleci/golang:latest
     steps:
       - attach_workspace:
         at: ${ARTIFACTS_DIR}
