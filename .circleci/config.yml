@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/python:3.6.1
         environment:
-          ARTIFACTS_DIR: /project/artifacts        
+          ARTIFACTS_DIR: ~/project/artifacts        
     steps:
       - checkout
       - run: mkdir -p ${ARTIFACTS_DIR} 
