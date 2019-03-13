@@ -19,7 +19,7 @@ jobs:
           at: workspace
       - run:
           name: "Publish Release on Github"
-          comamnd: |
+          command: |
             VERSION=$(date +%Y%m%d)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} workspace/stuff
 workflows:
