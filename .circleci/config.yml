@@ -31,9 +31,9 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build:
-          filters:
+          filters: # required: publish-github-release defines a filter.tag and all its dependencies must defined a filter.tag too
             tags:
-              only: /^\d+\.\d+\.\d+$/      
+              only: /.*/      
       - publish-github-release:
           filters:
             tags:
