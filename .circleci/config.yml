@@ -33,8 +33,6 @@ workflows:
       - build
       - publish-github-release:
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^v.*/
           requires:
