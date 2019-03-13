@@ -14,6 +14,12 @@ jobs:
           root: workspace
           paths:
             - stuff 
+  has_tag:
+    steps:
+      - run:
+          name: Check for existing git tags
+          command: |
+            [[  $CIRCLE_TAG && ${CIRCLE_TAG-x} ]] && echo "Tag Found: $CIRCLE_TAG" || echo "No tag was found - no deployment will happen" && exit 1        
   publish-github-release:
     docker:
       - image: cibuilds/github:latest
@@ -32,9 +38,12 @@ workflows:
   build_and_manually_release:
     jobs:      
       - build
-      - publish-github-release:
+      - has_tag:
           filters:
-            tags:
-              only: /^\d+\.\d+\.\d+$/
+            branches:
+              - tag-for-release  
           requires:
-            - build      
+          - build
+      - publish-github-release:
+          requires:
+            - has_tag
