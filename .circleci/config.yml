@@ -1,6 +1,6 @@
 ##  Circle CI v 2.0 template
 ##  This template builds a CI pipeline 
-##    build -> wait_for_approval -> publish-github-release
+##    build -> publish-github-release
 version: 2
 jobs:
   build:
