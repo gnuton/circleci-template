@@ -5,9 +5,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:latest
+      - image: ubuntu:latest
     steps:
       - checkout
+      - run: apt update && apt install -y ca-certificates # needed to store artifacts 
       - run: mkdir -p workspace/stuff 
       - run: echo "TEST" > workspace/stuff/MyArtifact.txt
       - persist_to_workspace:
