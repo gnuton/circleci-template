@@ -2,25 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      image: circleci/python:3.6.1
+      - image: circleci/python:3.6.1
     steps:
       - checkout
       - run: mkdir -p /workspace
-      - run:
-          name: Create a file
-          command: touch /workspace/XXXX
+      - run: touch /workspace/XXXX
       - persist_to_workspace:
           root: /workspace
-
   deploy:
     docker:
       - image: circleci/golang:1.8
     steps:
       - attach_workspace:
         at: /workspace
-
       - run: ls /workspace
-
 workflows:
   version: 2
   build_and_manually_release:
