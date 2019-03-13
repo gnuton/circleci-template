@@ -2,10 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-   image: circleci/python:3.6.1 
+      image: circleci/python:3.6.1
     steps:
       - checkout
-      - run: mkdir -p /workspace 
+      - run: mkdir -p /workspace
       - run:
           name: Create a file
           command: touch /workspace/XXXX
