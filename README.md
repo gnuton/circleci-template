@@ -1,10 +1,10 @@
 [![CircleCI](https://circleci.com/gh/gnuton/circleci-template.svg?style=svg)](https://circleci.com/gh/gnuton/circleci-template)
 
 # Circleci-template
-This repository contains all circleCI files required to build some common pipelines:
+This repository contains the configuration files required to build a few basic common CI pipelines:
 
 ## Master branch
-the .circleci dir in the master branch contains this workflow
+the .circleci dir in the master branch contains this CI workflow
 
   BUILD --> WAIT FOR APPROVAL --> PUBLISH RELEASE on GITHUB
 
