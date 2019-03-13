@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Check for existing git tags
           command: |
-            [[  -z ${CIRCLE_TAG} ]] && echo "Tag Found: ${CIRCLE_TAG}" || echo "No tag was found - no deployment will happen" && exit 1
+            [[  -z ${CIRCLE_TAG} ]] && (echo "No tag found, next step won't happen" && exit 1) || echo "Proceding with next step"
   publish-github-release:
     docker:
       - image: cibuilds/github:latest
