@@ -6,19 +6,23 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace/stuff 
-      - run: touch workspace/stuff/XXXX
+      - run: touch workspace/stuff/MyArtifact
       - persist_to_workspace:
           root: workspace
           paths:
             - stuff 
-  deploy:
+  publish-github-release:
     docker:
       - image: circleci/golang:latest
     steps:
       - attach_workspace:
           at: workspace
-      - run: ls workspace
-      - run: ls workspace/stuff
+      - run:
+        name: "Publish Release on Github"
+        comamnd: |
+          get github.com/tcnksm/ghr
+          VERSION=$(date +%Y%m%d)
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} workspace/stuff  
 workflows:
   version: 2
   build_and_manually_release:
@@ -28,6 +32,6 @@ workflows:
           type: approval
           requires:
             - build
-      - deploy:
+      - publish-github-release:
           requires:
             - hold
