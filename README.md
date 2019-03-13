@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/gnuton/circleci-template.svg?style=svg)](https://circleci.com/gh/gnuton/circleci-template)
-
 # Circleci-template
 Every branch of this repository contains different CI pipelines for circleCI.
 
